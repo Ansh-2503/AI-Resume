@@ -13,6 +13,15 @@ const auth = () => {
   const next = location.search.split("next=")[1];
   const navigate = useNavigate();
 
+  const handelLogin = async () => {
+    try {
+      await auth.signIn();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (auth.isAuthenticated) navigate(next);
   }, [auth.isAuthenticated, next]);
@@ -48,7 +57,7 @@ const auth = () => {
                   <div className="flex flex-col items-center gap-2 text-center">
                     <h1>Login</h1>
                     <h2>Log In to continue Your job journey</h2>
-                    <button className="auth-button " onClick={auth.signIn}>
+                    <button className="auth-button " onClick={handelLogin}>
                       <p>Login</p>
                     </button>
                   </div>
