@@ -5,9 +5,10 @@ import { FileUploader } from "./FileUploader";
 const upload = () => {
     const [isProcessing, setIsProccessing] = useState(false);
     const [statusText, setStatusText] = useState('');
+    const [file, setFile] = useState<File | null>(null);
 
     const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
-
+      setFile(file);
     }
 
   return (
@@ -42,7 +43,7 @@ const upload = () => {
                 </div>
                 <div className="form-div">
                     <label htmlFor="uploader">Upload Resume</label>
-                    <FileUploader/>
+                    <FileUploader onFileSelect={handleSubmit} />
                 </div>
                 <button className="primary-button" type="submit">
                     Analyze Resume
