@@ -18,7 +18,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!auth.isAuthenticated) navigate('/auth?next=/')
+    if (!auth.isAuthenticated) navigate("/auth?next=/");
   }, [auth.isAuthenticated]);
 
   return (
@@ -31,11 +31,12 @@ export default function Home() {
         </div>
 
         {resumes.length > 0 && (
-          <div className="resumes-section">
-            {resumes.map((resume) => (
-              <ResCard key={resume.id} resume={resume} />
-            ))}
-            ;
+          <div className="flex justify-center">
+            <div className="resumes-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-12 py-8">
+              {resumes.map((resume) => (
+                <ResCard key={resume.id} resume={resume} />
+              ))}
+            </div>
           </div>
         )}
       </section>

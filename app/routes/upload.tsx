@@ -1,53 +1,72 @@
 import { useState, type FormEvent } from "react";
 import Navbar from "~/Components/Navbar";
-import { FileUploader } from "./FileUploader";
+import FileUploader from "./FileUploader";
 
 const upload = () => {
-    const [isProcessing, setIsProccessing] = useState(false);
-    const [statusText, setStatusText] = useState('');
-    const [file, setFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [statusText, setStatusText] = useState('');
+  const [file, setFile] = useState<File | null>(null);
 
-    const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
-      setFile(file);
-    }
+  const handleFileSelect = (file:File | null) => {
+    setFile(file);
+  }
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {};
 
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
       <Navbar />
       <section className="main-section">
         <div className="page-heading py-16">
-          <h1>Smart feedback for your dream job</h1>
-          {/* ---------------- { Proccess Handling } ---------------- */}
+          <h1>Smart Feedback for you Dreame Job</h1>
           {isProcessing ? (
             <>
-            <h2>{statusText}</h2>
-            <img src="/images/resume-scan.gif" className="w-full" />
+              <h2>{statusText}</h2>
+              <img src="/images/resume-scan.gif" className="w-full" />
             </>
-          ):(
-            <h2>Drop your resume for an ATS score and improvement tips</h2>
+          ) : (
+            <h2>Drop your Resume for an ATS score and improvement tips</h2>
           )}
-          {/* ---------------- { If Not Proccessing Handling } ---------------- */}
           {!isProcessing && (
-            <form id="upload-form" onSubmit={handleSubmit} className="flex flex-col gap-4 mt-8">
-                <div className="form-div">
-                    <label htmlFor="compony-name">Compony Name</label>
-                    <input type="text" name="compony-name" placeholder="Compony Name" id="compony-name"/>
-                </div>
-                <div className="form-div">
-                    <label htmlFor="job-title">Job Title</label>
-                    <input type="text" name="job-title" placeholder="Job Title" id="job-title"/>
-                </div>
-                <div className="form-div">
-                    <label htmlFor="job-discription">Job Discription</label>
-                    <textarea rows={5} name="job-discription" placeholder="Job Discription" id="job-discription"/>
-                </div>
-                <div className="form-div">
-                    <label htmlFor="uploader">Upload Resume</label>
-                    {/* <FileUploader onFileSelect={handleSubmit} /> */}
-                </div>
-                <button className="primary-button" type="submit">
-                    Analyze Resume
-                </button>
+            <form
+              id="upload-form"
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4 mt-8"
+            >
+              <div className="form-div">
+                <label htmlFor="compony-name">Compony Name</label>
+                <input
+                  type="text"
+                  name="compony-name"
+                  placeholder="Compony Name"
+                  id="compony-name"
+                />
+              </div>
+              <div className="form-div">
+                <label htmlFor="job-title">Job Title</label>
+                <input
+                  type="text"
+                  name="job-title"
+                  placeholder="Job Title"
+                  id="job-title"
+                />
+              </div>
+              <div className="form-div">
+                <label htmlFor="job-description">Job Description</label>
+                <textarea
+                  rows={5}
+                  name="job-description"
+                  placeholder="Job Description"
+                  id="job-description"
+                />
+              </div>
+              <div className="form-div">
+                <label htmlFor="uploader">Upload Resume</label>
+                <FileUploader onFileSelect={handleFileSelect} />
+              </div>
+              <button className="primary-button" type="submit">
+                Analyze Resume
+              </button>
             </form>
           )}
         </div>
